@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://your-image-link.com/logo.png](https://github.com/QazHibiki/Brain-AR/issues/1#issue-3147298381)" width="120" alt="Brain AR Logo"/>
+  <img src="https://github.com/QazHibiki/Brain-AR/issues/1#issue-3147298381" width="120" alt="Brain AR Logo"/>
 </p>
 
 <h1 align="center">🧠 Brain AR</h1>
