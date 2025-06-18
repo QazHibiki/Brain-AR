@@ -235,47 +235,13 @@ class ARExperienceScreen extends StatelessWidget {
 class QRInstructionScreen extends StatelessWidget {
   const QRInstructionScreen({super.key});
 
-  void _showLinkDialog(BuildContext context) {
-    const String url = 'https://mywebar.com/p/Project_0_5eb5i1vnpr';
+  void _launchARLink() async {
+    const String url = 'https://mywebar.com/p/Project_0_vcmflrkuji';
     final Uri uri = Uri.parse(url);
 
-    showDialog(
-      context: context,
-      builder: (_) => AlertDialog(
-        title: const Text('Start AR Experience'),
-        content: Column(
-          mainAxisSize: MainAxisSize.min,
-          children: [
-            const Text('Click the link below to begin:', style: TextStyle(fontSize: 18)),
-            const SizedBox(height: 10),
-            GestureDetector(
-              onTap: () async {
-                if (await canLaunchUrl(uri)) {
-                  await launchUrl(uri, mode: LaunchMode.externalApplication);
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(content: Text('Could not launch the link.')),
-                  );
-                }
-              },
-              child: Text(
-                url,
-                style: const TextStyle(
-                  color: Colors.blue,
-                  decoration: TextDecoration.underline,
-                ),
-              ),
-            ),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () => Navigator.of(context).pop(),
-            child: const Text('Close'),
-          ),
-        ],
-      ),
-    );
+    if (!await launchUrl(uri, mode: LaunchMode.externalApplication)) {
+      debugPrint("❌ Could not launch $url");
+    }
   }
 
   @override
@@ -292,6 +258,7 @@ class QRInstructionScreen extends StatelessWidget {
           ),
           child: Stack(
             children: [
+              // Top bar
               Positioned(
                 top: 50,
                 left: 16,
@@ -314,6 +281,8 @@ class QRInstructionScreen extends StatelessWidget {
                   ],
                 ),
               ),
+
+              // Content
               Positioned(
                 top: 100,
                 left: 0,
@@ -363,7 +332,7 @@ class QRInstructionScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       ElevatedButton(
-                        onPressed: () => _showLinkDialog(context),
+                        onPressed: _launchARLink,
                         style: ElevatedButton.styleFrom(
                           backgroundColor: const Color(0xFFF5F5F5),
                           foregroundColor: Colors.black,
